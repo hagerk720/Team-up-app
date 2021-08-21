@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signFragments.LogInFragment"
+    app:layout_constraintCircleRadius="30dp"
+   >
+
+    <!-- TODO: Update blank fragment layout -->
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+
+             <EditText
+                 android:id="@+id/logInFragment_userName_editT"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Enter Your Email"
+                 android:layout_marginTop="70dp"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginEnd="10dp"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
+                 />
+
+             <EditText
+                 android:id="@+id/logInFragment_password_editT"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:hint="Password "
+                 app:layout_constraintTop_toBottomOf="@id/logInFragment_userName_editT"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+                 android:layout_marginTop="10dp"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginEnd="10dp"/>
+
+             <TextView
+                 android:id="@+id/logInFragment_ForgetPassword_text"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginEnd="9dp"
+                 android:layout_marginRight="9dp"
+                 android:text="forget Password ?"
+                 app:layout_constraintEnd_toEndOf="@+id/logInFragment_userName_editT"
+                 app:layout_constraintTop_toBottomOf="@id/logInFragment_password_editT"/>
+
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

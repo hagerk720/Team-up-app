@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".signFragments.SignUpFragment"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/SignUpFragment_email_editT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email "
+            android:layout_marginTop="70dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <EditText
+            android:id="@+id/SignUpFragment_userName_editT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=" User Name "
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SignUpFragment_email_editT"
+
+            />
+        <EditText
+            android:id="@+id/SignUpFragment_password_editT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password "
+            app:layout_constraintTop_toBottomOf="@id/SignUpFragment_userName_editT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+        <EditText
+            android:id="@+id/SignUpFragment_confirmPassword_editT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Password "
+            app:layout_constraintTop_toBottomOf="@id/SignUpFragment_password_editT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:drawableEnd="@drawable/ic_baseline_remove_red_eye_24"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

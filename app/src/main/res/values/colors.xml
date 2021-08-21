@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#14A800</color>
+    <color name="colorPrimaryDark">#14A800</color>
+    <color name="colorAccent">#14A800</color>
+    <color name="background">#E5E5E5</color>
+    <color name="login_screen_color">#FFFCFC</color>
+    <color name="background_profile_photo">#E3FEE0</color>
+
+
+
+</resources>

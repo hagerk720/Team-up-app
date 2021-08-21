@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F6FF"
+    tools:context=".HomeActivity">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F6FF"
+    >
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:background="@drawable/ic_wave"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/homeActivity_account_img"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_account_photo"
+            app:riv_oval="true" />
+
+        <ImageView
+            android:id="@+id/homeActivity_chat_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="270dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_chat_icon" />
+
+    </LinearLayout>
+    <fragment
+        android:id="@+id/homeActivity_nav_hostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        class="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/home_activity_navigation_graph"
+        app:defaultNavHost="true"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity = "start"
+        app:menu="@menu/navigation_menu"
+        app:headerLayout="@layout/layout_navigation_header"
+        android:background="#F7F6FF"
+        />
+</androidx.drawerlayout.widget.DrawerLayout>

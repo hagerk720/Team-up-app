@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item >
+        <shape android:shape="rectangle">
+            <solid android:color="@color/login_screen_color"/>
+            <corners android:radius="30dp"/>
+            <stroke android:color="#E5E5E5" android:width="2dp"/>
+        </shape>
+    </item>
+
+
+</selector>
