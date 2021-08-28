@@ -1,23 +1,24 @@
 package com.example.teamup;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
+import static com.example.teamup.R.drawable.buttons_selected;
+import static com.example.teamup.R.drawable.login_buttons;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.teamup.databinding.ActivityMainBinding;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
-import static com.example.teamup.R.drawable.buttons_selected;
-import static com.example.teamup.R.drawable.login_buttons;
+import com.example.teamup.databinding.ActivityMainBinding;
+import com.facebook.CallbackManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding ;
+    private CallbackManager callbackManager ;
+    private FirebaseAuth firebaseAuth ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
                 binding.loginSelectionButton.setBackgroundResource(buttons_selected);
                 binding.signUpSelectionButton.setBackgroundResource(login_buttons);
-                binding.mainActivityLogInBtn.setText("LOG IN");
 
             }
         });
@@ -41,17 +41,18 @@ public class MainActivity extends AppCompatActivity {
                 navController.navigate(R.id.signUpFragment);
                 binding.loginSelectionButton.setBackgroundResource(login_buttons);
                 binding.signUpSelectionButton.setBackgroundResource(buttons_selected);
-                binding.mainActivityLogInBtn.setText("SIGN UP");
+
+
             }
         });
-        binding.mainActivityLogInBtn.setOnClickListener(new View.OnClickListener() {
+        binding.faceBookIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this , HomeActivity.class);
-                startActivity(intent);
-                finish();
+                startActivity(new Intent(MainActivity.this , FacebookAuthActivity.class));
+                //finish();
             }
         });
+
 
     }
 }

@@ -62,6 +62,7 @@
         android:layout_gravity = "start"
         app:menu="@menu/navigation_menu"
         app:headerLayout="@layout/layout_navigation_header"
+        android:accessibilityHeading="true"
         android:background="#F7F6FF"
         />
 </androidx.drawerlayout.widget.DrawerLayout>

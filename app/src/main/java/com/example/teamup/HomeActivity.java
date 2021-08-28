@@ -1,9 +1,12 @@
 package com.example.teamup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -31,5 +34,12 @@ ActivityHomeBinding activityHomeBinding ;
         activityHomeBinding.navigationView.setItemIconTintList(null);
         NavController navController = Navigation.findNavController(this, R.id.homeActivity_nav_hostFragment);
         NavigationUI.setupWithNavController(activityHomeBinding.navigationView , navController);
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra("userName");
+        Toast.makeText(getApplicationContext(), userName, Toast.LENGTH_SHORT).show();
+        View HeaderView =   activityHomeBinding.navigationView.getHeaderView(0);
+        TextView userNameTv= HeaderView.findViewById(R.id.navigation_userName_tv);
+        userNameTv.setText(userName) ;
+
     }
 }
