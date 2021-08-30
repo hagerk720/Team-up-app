@@ -17,7 +17,5 @@
         android:name="com.example.teamup.signFragments.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
-        <action android:id="@+id/signUpFragment_to_HomeActivity"
-            app:destination="@+id/drawerLayout"/>
     </fragment>
 </navigation>

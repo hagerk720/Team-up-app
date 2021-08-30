@@ -1,29 +1,29 @@
 package com.example.teamup;
 
 public class User {
-    String Email , UserName ;
+    public String email , userName ;
 
     public User(String email, String userName) {
-        Email = email;
-        UserName = userName;
+        this.email = email;
+        this . userName = userName;
     }
 
     public User() {
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        email = email;
     }
 
     public String getUserName() {
-        return UserName;
+        return userName;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        userName = userName;
     }
 }

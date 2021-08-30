@@ -17,6 +17,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +31,8 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LogInFragment extends Fragment {
     FragmentLogInBinding binding ;
     private FirebaseAuth auth ;
+    public DatabaseReference reference ;
+
 
     public LogInFragment() {
         // Required empty public constructor
@@ -75,8 +82,7 @@ public class LogInFragment extends Fragment {
           @Override
           public void onSuccess(AuthResult authResult) {
               Toast.makeText(getContext(), "success login", Toast.LENGTH_SHORT).show();
-              startActivity(new Intent( getContext() , HomeActivity.class));
-
+              RetrievingUserDataFromFirebase();
           }
       }).addOnFailureListener(new OnFailureListener() {
           @Override
@@ -84,5 +90,27 @@ public class LogInFragment extends Fragment {
               Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
           }
       });
+    }
+    public void RetrievingUserDataFromFirebase() {
+
+        reference = FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot != null) {
+                    String userName = snapshot.child("userName").getValue().toString();
+                    Toast.makeText(getContext(), userName + " Sign up fragment ", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), HomeActivity.class);
+                    intent.putExtra("userName" , userName) ;
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
