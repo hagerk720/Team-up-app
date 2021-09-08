@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7F6FF"
-    tools:context=".HomeActivity">
+    tools:context=".activities.HomeActivity">
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,24 +15,28 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="190dp"
-        android:background="@drawable/ic_wave"
+        android:layout_width="432dp"
+        android:layout_height="127dp"
+        android:background="@drawable/wave"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
 
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+
+        <TextView
             android:id="@+id/homeActivity_account_img"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:background="@drawable/profile_photo"
             android:layout_marginStart="15dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/ic_account_photo"
-            app:riv_oval="true" />
+            android:gravity="center"
+            android:textSize="25dp"
+            android:textColor="#000000"
+            />
 
         <ImageView
             android:id="@+id/homeActivity_chat_img"
@@ -43,6 +47,7 @@
             android:src="@drawable/ic_chat_icon" />
 
     </LinearLayout>
+
     <fragment
         android:id="@+id/homeActivity_nav_hostFragment"
         android:layout_width="match_parent"

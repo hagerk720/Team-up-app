@@ -1,4 +1,4 @@
-package com.example.teamup;
+package com.example.teamup.activities;
 
 import static com.example.teamup.R.drawable.buttons_selected;
 import static com.example.teamup.R.drawable.login_buttons;
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.teamup.R;
 import com.example.teamup.databinding.ActivityMainBinding;
 import com.facebook.CallbackManager;
 import com.google.firebase.auth.FirebaseAuth;

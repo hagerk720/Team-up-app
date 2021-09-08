@@ -21,10 +21,23 @@
         app:fabSize="normal"
         android:layout_margin="40dp"
         app:srcCompat="@drawable/ic_add"/>
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginTop="20dp"
+            android:text="Gather your team"
+            android:layout_marginStart="15dp"
+            android:textSize="30sp"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/homeFragment_recyclerView_posts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/textview"
+            android:layout_marginTop="20dp"
             android:scrollbars="vertical"
             android:layout_margin="15dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.teamup.HomeActivity;
-import com.example.teamup.User;
+import com.example.teamup.Objects.User;
+import com.example.teamup.activities.HomeActivity;
 import com.example.teamup.databinding.FragmentSignUpBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -103,18 +103,33 @@ public class SignUpFragment extends Fragment {
         } else if (!password.equals(confirmPassword)) {
             Toast.makeText(getContext(), "password not identical", Toast.LENGTH_SHORT).show();
         } else {
-            createUser(Email, password, userName);
+            int index = -1;
+            for(int i = 0; i < userName.length(); i++ ){
+                if(Character.isWhitespace(userName.charAt(i))){
+                    index = i;
+                    break;
+                }
+            }
+            String userNickname ;
+            if(index != -1) {
+                userNickname = Character.toString(userName.charAt(0)) + Character.toString(userName.charAt(index+1));
+                System.out.println(index );
+            }
+            else {
+                 userNickname = Character.toString(userName.charAt(0));
+            }
+            createUser(Email, password, userName , userNickname.toUpperCase());
         }
     }
 
-    public void createUser(String email, String password, String userName) {
+    public void createUser(String email, String password, String userName , String userNickname) {
         auth = FirebaseAuth.getInstance();
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity() ,new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(getContext(), "user created", Toast.LENGTH_SHORT).show();
-                    User user = new User(email, userName);
+                    User user = new User(email, userName , userNickname);
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -154,10 +169,11 @@ public class SignUpFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot != null) {
                     String userName = snapshot.child("userName").getValue().toString();
-                    Toast.makeText(getContext(), userName + " Sign up fragment ", Toast.LENGTH_SHORT).show();
-               Intent intent = new Intent(getContext(), HomeActivity.class);
-                intent.putExtra("userName" , userName) ;
-                startActivity(intent);
+                    String userNickname = snapshot.child("userNickname").getValue().toString();
+                    Intent intent = new Intent(getContext(), HomeActivity.class);
+                    intent.putExtra("userName" , userName) ;
+                    intent.putExtra("userNickname" , userNickname);
+                    startActivity(intent);
                 }
             }
 

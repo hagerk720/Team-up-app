@@ -3,12 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_account_photo.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_baseline_add_circle_outline_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_home.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_login_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_support1.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_team.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_user.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/ic_white_cross.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/login_buttons.xml" value="0.2703125" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/drawable/profile_photo.xml" value="0.2703125" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/activity_facebook_auth.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/activity_home.xml" value="0.22056159420289856" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/activity_main.xml" value="0.14367816091954022" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_home.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_log_in.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_my_team.xml" value="0.24722222222222223" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_sign_up.xml" value="0.22056159420289856" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/home_fragment_card_view_posts.xml" value="0.264" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/layout_navigation_header.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/my_team_fragment_card_view_post.xml" value="0.264" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/menu/navigation_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

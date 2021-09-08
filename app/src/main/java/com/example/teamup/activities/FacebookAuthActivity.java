@@ -1,4 +1,4 @@
-package com.example.teamup;
+package com.example.teamup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 
-public class FacebookAuthActivity extends MainActivity{
+public class FacebookAuthActivity extends MainActivity {
     private CallbackManager callbackManager ;
     private FirebaseAuth firebaseAuth ;
     private FirebaseAuth.AuthStateListener authStateListener ;

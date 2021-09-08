@@ -1,5 +1,6 @@
 package com.example.teamup.signFragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.teamup.HomeActivity;
+import com.example.teamup.activities.HomeActivity;
 import com.example.teamup.databinding.FragmentLogInBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -51,17 +52,21 @@ public class LogInFragment extends Fragment {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentLogInBinding.inflate(inflater , container , false) ;
         View view = binding.getRoot() ;
+
         binding.logInFragmentLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 collectData();
             }
         });
+
+
 
         return view;
     }
@@ -100,9 +105,11 @@ public class LogInFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot != null) {
                     String userName = snapshot.child("userName").getValue().toString();
+                    String userNickname = snapshot.child("userNickname").getValue().toString();
                     Toast.makeText(getContext(), userName + " Sign up fragment ", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getContext(), HomeActivity.class);
                     intent.putExtra("userName" , userName) ;
+                    intent.putExtra("userNickname" , userNickname);
                     startActivity(intent);
                 }
             }

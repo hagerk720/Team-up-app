@@ -1,4 +1,4 @@
-package com.example.teamup;
+package com.example.teamup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -14,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.teamup.R;
 import com.example.teamup.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ ActivityHomeBinding activityHomeBinding ;
         super.onCreate(savedInstanceState);
         activityHomeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(activityHomeBinding.getRoot());
-        Animation animation = AnimationUtils.loadAnimation(this ,R.anim.top_header);
+        Animation animation = AnimationUtils.loadAnimation(this , R.anim.top_header);
         activityHomeBinding.linearLayout.setAnimation(animation);
         activityHomeBinding.homeActivityAccountImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,9 +39,12 @@ ActivityHomeBinding activityHomeBinding ;
     public void changeUserNameViewHeader(){
         Intent intent = getIntent();
         String userName = intent.getStringExtra("userName");
-        Toast.makeText(getApplicationContext(), userName, Toast.LENGTH_SHORT).show();
+        String userNickname = intent.getStringExtra("userNickname");
         View HeaderView =   activityHomeBinding.navigationView.getHeaderView(0);
         TextView userNameTv= HeaderView.findViewById(R.id.navigation_userName_tv);
+        TextView userPhoto = HeaderView.findViewById(R.id.navigation_profile_image);
+        activityHomeBinding.homeActivityAccountImg.setText(userNickname);
         userNameTv.setText(userName) ;
+        userPhoto.setText(userNickname);
     }
 }

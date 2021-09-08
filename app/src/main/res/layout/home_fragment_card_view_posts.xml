@@ -3,27 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
     app:cardCornerRadius="20dp"
-    android:layout_margin="20dp">
+    android:layout_margin="10dp">
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp">
-        <com.makeramen.roundedimageview.RoundedImageView
+
+        <TextView
             android:id="@+id/profile_photo_in_postHomeFragment"
             android:layout_width="46dp"
             android:layout_height="46dp"
-            android:scaleType="fitCenter"
-            app:riv_border_width="2dp"
-            app:riv_border_color="@color/colorPrimary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_home"
-            app:riv_corner_radius="30dp"
-            app:riv_oval="true"
-            app:riv_mutate_background="true"
-            android:background="@color/background_profile_photo"
+            android:background="@drawable/profile_photo"
+            android:gravity="center"
             android:layout_margin="7dp"
+            android:textSize="25dp"
+            android:textColor="#000000"
             />
         <TextView
             android:id="@+id/post_userName_tv"
@@ -52,41 +51,34 @@
 
         <TextView
             android:id="@+id/team_description_postHomeFragment_tv"
-            android:layout_width="330dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="15dp"
             android:text="I’m in faculty of Engineer at Alex and I’m collecting team to enter ICPC "
             android:textColor="#000000"
             android:textSize="14dp"
+            android:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profile_photo_in_postHomeFragment"/>
+
         <TextView
             android:id="@+id/join_team_postHomeFragment_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/team_description_postHomeFragment_tv"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:textSize="15sp"
+            android:layout_marginStart="200dp"
+            android:layout_marginEnd="30dp"
             android:text="Join"
-            android:layout_marginStart="230dp"/>
-        <TextView
-            android:id="@+id/message_postHomeFragment_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/team_description_postHomeFragment_tv"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/join_team_postHomeFragment_tv"
             android:textColor="@color/colorPrimary"
-            android:layout_marginStart="25dp"
-            android:textStyle="bold"
             android:textSize="15sp"
-            android:text="Message"/>
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/team_description_postHomeFragment_tv" />
+
+
         <TextView
             android:id="@+id/num_team_postHomeFragment_tv"
             android:layout_width="wrap_content"

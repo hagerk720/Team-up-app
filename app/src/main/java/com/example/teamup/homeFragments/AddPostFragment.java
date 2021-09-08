@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,14 +14,23 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.teamup.Objects.Post;
 import com.example.teamup.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddPostFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class AddPostFragment extends Fragment {
+    DatabaseReference reference;
+    public String userName;
+    public String userNickname ;
+    Post post;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,14 +45,7 @@ public class AddPostFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddPostFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
     public static AddPostFragment newInstance(String param1, String param2) {
         AddPostFragment fragment = new AddPostFragment();
@@ -76,8 +80,51 @@ public class AddPostFragment extends Fragment {
         add_post_fragment_post_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RetrievingUserName(view);
                 navController.navigate(R.id.action_addPostFragment_to_homeFragment);
             }
         });
     }
+
+    public void createPost(Post post) {
+        FirebaseDatabase.getInstance().getReference("Posts")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .push().setValue(post).addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getContext(), "post saved", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    public void RetrievingUserName(View view) {
+        reference = FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot != null) {
+
+                    userName = snapshot.child("userName").getValue().toString();
+                    userNickname = snapshot.child("userNickname").getValue().toString();
+                    EditText team_Title = view.findViewById(R.id.add_fragment_team_title_et);
+                    EditText num_Of_Team = view.findViewById(R.id.add_fragment_num_need_et);
+                    EditText post_Desc = view.findViewById(R.id.add_fragment_team_description_et);
+                    String teamTitle = team_Title.getText().toString();
+                    String numOfTeam = num_Of_Team.getText().toString();
+                    String postDesc = post_Desc.getText().toString();
+                    post = new Post(teamTitle, numOfTeam, postDesc ,userName , userNickname);
+                    createPost(post);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FacebookAuthActivity"
+            android:name=".activities.FacebookAuthActivity"
             android:exported="true" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".introductionActivity">
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.introductionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activities.MainActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

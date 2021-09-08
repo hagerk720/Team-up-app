@@ -1,11 +1,17 @@
-package com.example.teamup;
+package com.example.teamup.Objects;
 
 public class User {
-    public String email , userName ;
+    public String email , userName , userNickname ;
 
     public User(String email, String userName) {
         this.email = email;
         this . userName = userName;
+    }
+
+    public User(String email, String userName, String userNickname) {
+        this.email = email;
+        this.userName = userName;
+        this.userNickname = userNickname;
     }
 
     public User() {

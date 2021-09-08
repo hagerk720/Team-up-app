@@ -6,15 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp">
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <TextView
         android:id="@+id/navigation_profile_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:src="@drawable/ic_account_photo"
+        android:background="@drawable/profile_photo"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="centerCrop"
-        app:riv_oval="true" />
+        />
     <View
         android:id="@+id/viewSupporter"
         android:layout_width="1dp"
