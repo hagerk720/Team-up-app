@@ -38,6 +38,7 @@ public class MyTeamFragment extends Fragment implements OnItemClickListener {
     DatabaseReference reference ;
     MyTeamPostAdapter adapter ;
     ArrayList<Post> postList ;
+    ArrayList<String > keys ;
 
 
 
@@ -71,15 +72,18 @@ public class MyTeamFragment extends Fragment implements OnItemClickListener {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         postList = new ArrayList<>();
-        adapter = new MyTeamPostAdapter(getContext(), postList ,this);
+        keys = new ArrayList<>();
+        adapter = new MyTeamPostAdapter(getContext(), postList ,this , keys);
 
         recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         Post post = dataSnapshot.getValue(Post.class);
                         postList.add(post);
+                        keys.add(dataSnapshot.getKey());
 
                 }
                 adapter.notifyDataSetChanged();
@@ -110,11 +114,16 @@ public class MyTeamFragment extends Fragment implements OnItemClickListener {
 
     @Override
     public void onItemClick(int Position) {
-        Toast.makeText(getContext(), deletePost(Position), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), deletePost(keys.get(Position)), Toast.LENGTH_SHORT).show();
+        keys.remove(Position) ;
+        postList.remove(Position) ;
+        adapter.notifyDataSetChanged();
+
     }
-    public String  deletePost(int position){
-        String str =  reference.getRef().getKey();
-      //  reference.child(str).removeValue();
-        return str ;
+    public String  deletePost(String key){
+        reference = FirebaseDatabase.getInstance().getReference("Posts")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(key);
+        reference.removeValue();
+        return key ;
     }
 }

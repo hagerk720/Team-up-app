@@ -76,4 +76,12 @@ public class Post {
     public void setUserNickname(String userNickname) {
         this.userNickname = userNickname;
     }
+
+    public String getPostID() {
+        return postID;
+    }
+
+    public void setPostID(String postID) {
+        this.postID = postID;
+    }
 }

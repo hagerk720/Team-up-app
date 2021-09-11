@@ -41,23 +41,16 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
     DatabaseReference reference ;
     RecyclerViewAdapter adapter ;
     ArrayList<Post> postList ;
+    ArrayList<String> keys ;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
 
     public HomeFragment() {
     }
 
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -65,8 +58,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -85,6 +77,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         postList = new ArrayList<>();
+        keys = new ArrayList<>();
         adapter = new RecyclerViewAdapter(getContext(), postList ,this);
 
         recyclerView.setAdapter(adapter);
@@ -95,6 +88,8 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
                         Post post = data.getValue(Post.class);
                         postList.add(post);
+                        keys.add(data.getKey());
+                        adapter.notifyDataSetChanged();
                     }
                 }
                 adapter.notifyDataSetChanged();

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,24 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.teamup.Objects.Post;
 import com.example.teamup.OnItemClickListener;
 import com.example.teamup.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class MyTeamPostAdapter extends RecyclerView.Adapter<MyTeamPostAdapter.ViewHolder> {
     Context context ;
     ArrayList<Post> posts ;
+    ArrayList<String> keys ;
     DatabaseReference reference ;
     private final OnItemClickListener listener;
 
 
 
-    public MyTeamPostAdapter(Context context, ArrayList<Post> posts ,OnItemClickListener listener) {
+    public MyTeamPostAdapter(Context context, ArrayList<Post> posts ,OnItemClickListener listener , ArrayList<String> keys  ) {
         this.context = context;
         this.posts = posts;
         this.listener = listener ;
+        this.keys = keys ;
     }
 
     @NonNull
@@ -46,7 +45,6 @@ public class MyTeamPostAdapter extends RecyclerView.Adapter<MyTeamPostAdapter.Vi
         holder.teamName.setText(post.getTeamTitle());
         holder.numOfTeam.setText("Need " +post.getNumOfTeam() + " people");
         holder.description.setText(post.getPostDesc());
-
     }
 
     @Override
@@ -58,7 +56,7 @@ public class MyTeamPostAdapter extends RecyclerView.Adapter<MyTeamPostAdapter.Vi
         TextView  teamName, description, numOfTeam ,Edit , Delete ;
         OnItemClickListener listener ;
 
-        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView ,OnItemClickListener listener) {
             super(itemView);
             teamName = itemView.findViewById(R.id.team_name_myTeamFragment_tv);
             description = itemView.findViewById(R.id.team_description_myTeamFragment_tv);
@@ -71,15 +69,11 @@ public class MyTeamPostAdapter extends RecyclerView.Adapter<MyTeamPostAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(v.getContext(), deletePost(), Toast.LENGTH_SHORT).show();
+           listener.onItemClick(getAdapterPosition());
         }
+
+
     }
-    public String  deletePost(){
-        reference = FirebaseDatabase.getInstance().getReference("Posts")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        String str =  reference.getRef().getKey();
-        //  reference.child(str).removeValue();
-        return str ;
-    }
+
 
 }
