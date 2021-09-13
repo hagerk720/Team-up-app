@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,12 +36,12 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class MyTeamFragment extends Fragment implements OnItemClickListener {
-    RecyclerView recyclerView ;
-    DatabaseReference reference ;
-    MyTeamPostAdapter adapter ;
-    ArrayList<Post> postList ;
-    ArrayList<String > keys ;
-
+    RecyclerView recyclerView;
+    DatabaseReference reference;
+    MyTeamPostAdapter adapter;
+    ArrayList<Post> postList;
+    ArrayList<String> keys;
+    NavController navController ;
 
 
     public MyTeamFragment() {
@@ -73,17 +75,17 @@ public class MyTeamFragment extends Fragment implements OnItemClickListener {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         postList = new ArrayList<>();
         keys = new ArrayList<>();
-        adapter = new MyTeamPostAdapter(getContext(), postList ,this , keys);
+        adapter = new MyTeamPostAdapter(getContext(), postList, this, keys);
 
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        Post post = dataSnapshot.getValue(Post.class);
-                        postList.add(post);
-                        keys.add(dataSnapshot.getKey());
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Post post = dataSnapshot.getValue(Post.class);
+                    postList.add(post);
+                    keys.add(dataSnapshot.getKey());
 
                 }
                 adapter.notifyDataSetChanged();
@@ -100,30 +102,53 @@ public class MyTeamFragment extends Fragment implements OnItemClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        final NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
         FloatingActionButton my_Team_fragment_add_post_btn = view.findViewById(R.id.myTeamFragment_add_post_btn);
         my_Team_fragment_add_post_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_navigation_menu_myTeam_to_addPostFragment);
+
             }
         });
-        
+
+
 
     }
 
     @Override
-    public void onItemClick(int Position) {
-        Toast.makeText(getContext(), deletePost(keys.get(Position)), Toast.LENGTH_SHORT).show();
-        keys.remove(Position) ;
-        postList.remove(Position) ;
-        adapter.notifyDataSetChanged();
+    public void onItemClick(int Position, View v) {
+        TextView delete = v.findViewById(R.id.delete_myTeamFragment_tv);
+        if (v == delete) {
+                Toast.makeText(getContext(), deletePost(keys.get(Position)), Toast.LENGTH_SHORT).show();
+                keys.remove(Position);
+                postList.remove(Position);
+                recyclerView.getAdapter().notifyDataSetChanged();
+        }
+        else {
+            editPost(keys.get(Position));
+        }
 
     }
-    public String  deletePost(String key){
+
+    @Override
+    public void OnEditClick(int Position) {
+       Toast.makeText(getContext(), "Edit clicked", Toast.LENGTH_SHORT).show();
+
+    }
+
+    public String deletePost(String key) {
         reference = FirebaseDatabase.getInstance().getReference("Posts")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(key);
         reference.removeValue();
-        return key ;
+        return key;
+    }
+
+    public void editPost(String key) {
+        NavDirections directions = MyTeamFragmentDirections
+                .actionNavigationMenuMyTeamToAddPostFragment()
+                .setEditPost(key);
+        navController.navigate(directions);
+
     }
 }

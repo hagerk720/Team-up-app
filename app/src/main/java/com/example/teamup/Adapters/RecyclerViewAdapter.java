@@ -67,7 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
         @Override
         public void onClick(View v) {
-        listener.onItemClick(getAdapterPosition());
+        listener.onItemClick(getAdapterPosition() , v );
         if (!clicked){
             rearrangeCard(v);
             clicked = true ;

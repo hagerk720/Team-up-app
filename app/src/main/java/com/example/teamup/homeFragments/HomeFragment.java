@@ -13,14 +13,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.teamup.OnItemClickListener;
-import com.example.teamup.Objects.Post;
-import com.example.teamup.R;
 import com.example.teamup.Adapters.RecyclerViewAdapter;
+import com.example.teamup.Objects.Post;
+import com.example.teamup.OnItemClickListener;
+import com.example.teamup.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +43,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
     RecyclerViewAdapter adapter ;
     ArrayList<Post> postList ;
     ArrayList<String> keys ;
-
+    NavController navController;
 
 
     public HomeFragment() {
@@ -108,18 +109,26 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       final NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
         FloatingActionButton Home_fragment_add_post_btn = view.findViewById(R.id.homeFragment_add_post_btn);
         Home_fragment_add_post_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_homeFragment_to_addPostFragment);
+                NavDirections directions = HomeFragmentDirections
+                        .actionHomeFragmentToAddPostFragment()
+                        .setEditPost("null");
+                navController.navigate(directions);
             }
         });
     }
 
     @Override
-    public void onItemClick(int Position) {
+    public void onItemClick(int Position , View v ) {
         Toast.makeText(getContext(), "item clicked" + Position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnEditClick(int Position) {
+
     }
 }

@@ -31,15 +31,8 @@ public class AddPostFragment extends Fragment {
     public String userName;
     public String userNickname ;
     Post post;
+    NavController navController ;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public AddPostFragment() {
         // Required empty public constructor
@@ -50,9 +43,7 @@ public class AddPostFragment extends Fragment {
     public static AddPostFragment newInstance(String param1, String param2) {
         AddPostFragment fragment = new AddPostFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -60,8 +51,7 @@ public class AddPostFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -69,14 +59,48 @@ public class AddPostFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_post, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_post, container, false);
+        return view ;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        NavController navController = Navigation.findNavController(view);
+        Button btn = view.findViewById(R.id.add_fragment_post_btn);
         Button add_post_fragment_post_btn = view.findViewById(R.id.add_fragment_post_btn);
+
+        navController = Navigation.findNavController(view);
+
+        if (AddPostFragmentArgs.fromBundle(getArguments()).getEditPost()!= "null"){
+            btn.setText("Edit");
+
+            String key = AddPostFragmentArgs.fromBundle(getArguments()).getEditPost();
+            reference = FirebaseDatabase.getInstance().getReference("Posts")
+                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(key);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Post post = snapshot.getValue(Post.class);
+                    fillFields(view , post);
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                         updatePost(key , collectFields(view , post ));
+                         navController.navigate(R.id.action_addPostFragment_to_homeFragment);
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        else{
+            btn.setText("Post");
+        }
+
         add_post_fragment_post_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +149,34 @@ public class AddPostFragment extends Fragment {
                 Toast.makeText(getContext(), "onCancelled", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void updatePost(String key , Post post){
+        FirebaseDatabase.getInstance().getReference("Posts")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(key).setValue(post).addOnCompleteListener(getActivity(), new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getContext(), "updated", Toast.LENGTH_SHORT).show();
+            }
+        }) ;
+    }
+    public Post collectFields(View v , Post post){
+        EditText team_Title = v.findViewById(R.id.add_fragment_team_title_et);
+        EditText num_Of_Team = v.findViewById(R.id.add_fragment_num_need_et);
+        EditText post_Desc = v.findViewById(R.id.add_fragment_team_description_et);
+        String teamTitle = team_Title.getText().toString();
+        String numOfTeam = num_Of_Team.getText().toString();
+        String postDesc = post_Desc.getText().toString();
+        post = new Post(teamTitle, numOfTeam, postDesc , post.getUserName() , post.getUserNickname());
+       return post ;
+    }
+    public void fillFields(View v , Post post){
+        EditText team_Title = v.findViewById(R.id.add_fragment_team_title_et);
+        EditText num_Of_Team = v.findViewById(R.id.add_fragment_num_need_et);
+        EditText post_Desc = v.findViewById(R.id.add_fragment_team_description_et);
+        team_Title.setText(post.getTeamTitle());
+        num_Of_Team.setText(post.getNumOfTeam());
+        post_Desc.setText(post.getPostDesc());
     }
 
 }

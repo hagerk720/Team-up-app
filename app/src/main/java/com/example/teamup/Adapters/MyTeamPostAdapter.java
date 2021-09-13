@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.teamup.Objects.Post;
 import com.example.teamup.OnItemClickListener;
 import com.example.teamup.R;
-import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,6 @@ public class MyTeamPostAdapter extends RecyclerView.Adapter<MyTeamPostAdapter.Vi
     Context context ;
     ArrayList<Post> posts ;
     ArrayList<String> keys ;
-    DatabaseReference reference ;
     private final OnItemClickListener listener;
 
 
@@ -65,15 +63,16 @@ public class MyTeamPostAdapter extends RecyclerView.Adapter<MyTeamPostAdapter.Vi
             Delete = itemView.findViewById(R.id.delete_myTeamFragment_tv);
             this.listener = listener ;
             Delete.setOnClickListener(this);
+            Edit.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-           listener.onItemClick(getAdapterPosition());
+           listener.onItemClick(getAdapterPosition() , v );
+           //listener.OnEditClick(getAdapterPosition());
         }
 
 
     }
-
 
 }
