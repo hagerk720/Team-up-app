@@ -14,8 +14,8 @@
         android:icon="@drawable/ic_home" />
     <item
         android:id="@+id/navigation_menu_myChat"
-        android:title="chat"
-        android:icon="@drawable/ic_messenger" />
+        android:title="notification"
+        android:icon="@drawable/ic_baseline_notifications_24" />
 
 
 </menu>

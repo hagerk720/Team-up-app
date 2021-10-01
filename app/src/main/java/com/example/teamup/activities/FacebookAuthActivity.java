@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.teamup.Objects.User;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
@@ -29,6 +32,7 @@ public class FacebookAuthActivity extends MainActivity {
     private FirebaseAuth firebaseAuth ;
     private FirebaseAuth.AuthStateListener authStateListener ;
     private AccessTokenTracker accessTokenTracker ;
+    public DatabaseReference reference ;
 
 
 
@@ -77,6 +81,7 @@ public class FacebookAuthActivity extends MainActivity {
                     Toast.makeText(FacebookAuthActivity.this, "signInWithCredential:success", Toast.LENGTH_SHORT).show();
                     FirebaseUser user = firebaseAuth.getCurrentUser();
                     //Toast.makeText(getApplicationContext(), user.getDisplayName(), Toast.LENGTH_SHORT).show();
+                    addToUsers(user);
                     updateUI(user);
                 }
                 else{
@@ -105,5 +110,15 @@ public class FacebookAuthActivity extends MainActivity {
             callbackManager.onActivityResult(requestCode, resultCode, data);
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    public void addToUsers(FirebaseUser user){
+        User u = new User(user.getEmail() , user.getDisplayName() ,"hk") ;
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(user.getUid()).setValue(u).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(getApplicationContext(), "user add tp users", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

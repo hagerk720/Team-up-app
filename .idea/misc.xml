@@ -16,13 +16,16 @@
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/activity_facebook_auth.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/activity_home.xml" value="0.22056159420289856" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/activity_main.xml" value="0.14367816091954022" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_chat.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_home.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_log_in.xml" value="0.22056159420289856" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_my_team.xml" value="0.24722222222222223" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_profile.xml" value="0.22777777777777777" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/fragment_sign_up.xml" value="0.22056159420289856" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/home_fragment_card_view_posts.xml" value="0.264" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/layout_navigation_header.xml" value="0.14221014492753623" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/my_team_fragment_card_view_post.xml" value="0.264" />
+        <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/layout/notification_card.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/LENOVO/AndroidStudioProjects/TeamUp/app/src/main/res/menu/navigation_menu.xml" value="0.25416666666666665" />
       </map>
     </option>

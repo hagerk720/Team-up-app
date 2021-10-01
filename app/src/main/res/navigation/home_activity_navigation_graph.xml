@@ -32,7 +32,8 @@
         android:id="@+id/navigation_menu_myChat"
         android:name="com.example.teamup.homeFragments.chatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+    </fragment>
     <fragment
         android:id="@+id/addPostFragment"
         android:name="com.example.teamup.homeFragments.AddPostFragment"

@@ -2,6 +2,7 @@ package com.example.teamup.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,6 +19,7 @@ import com.example.teamup.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends AppCompatActivity {
 ActivityHomeBinding activityHomeBinding ;
+    NavController navController ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,13 @@ ActivityHomeBinding activityHomeBinding ;
         setContentView(activityHomeBinding.getRoot());
         Animation animation = AnimationUtils.loadAnimation(this , R.anim.top_header);
         activityHomeBinding.linearLayout.setAnimation(animation);
+        Intent intent = getIntent();
+
+        String bundle = intent.getStringExtra("userId");
+        if (bundle != null){
+            Log.d("id" , bundle);
+        }
+
         activityHomeBinding.homeActivityAccountImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,9 +41,10 @@ ActivityHomeBinding activityHomeBinding ;
             }
         });
         activityHomeBinding.navigationView.setItemIconTintList(null);
-        NavController navController = Navigation.findNavController(this, R.id.homeActivity_nav_hostFragment);
+        navController = Navigation.findNavController(this, R.id.homeActivity_nav_hostFragment);
         NavigationUI.setupWithNavController(activityHomeBinding.navigationView , navController);
         changeUserNameViewHeader();
+
     }
     public void changeUserNameViewHeader(){
         Intent intent = getIntent();
@@ -47,4 +57,7 @@ ActivityHomeBinding activityHomeBinding ;
         userNameTv.setText(userName) ;
         userPhoto.setText(userNickname);
     }
+
+
+
 }

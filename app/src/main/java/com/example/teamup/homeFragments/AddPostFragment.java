@@ -138,7 +138,7 @@ public class AddPostFragment extends Fragment {
                     String teamTitle = team_Title.getText().toString();
                     String numOfTeam = num_Of_Team.getText().toString();
                     String postDesc = post_Desc.getText().toString();
-                    post = new Post(teamTitle, numOfTeam, postDesc ,userName , userNickname);
+                    post = new Post(teamTitle, numOfTeam, postDesc ,userName , userNickname, FirebaseAuth.getInstance().getCurrentUser().getUid());
                     createPost(post);
 
                 }

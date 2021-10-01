@@ -40,11 +40,11 @@
 
         <ImageView
             android:id="@+id/homeActivity_chat_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginStart="270dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_chat_icon" />
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_baseline_notifications_24" />
 
     </LinearLayout>
 
