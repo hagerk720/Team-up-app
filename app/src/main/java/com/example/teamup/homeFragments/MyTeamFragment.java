@@ -120,7 +120,8 @@ public class MyTeamFragment extends Fragment implements OnItemClickListener {
     public void onItemClick(int Position, View v) {
         TextView delete = v.findViewById(R.id.delete_myTeamFragment_tv);
         if (v == delete) {
-                Toast.makeText(getContext(), deletePost(keys.get(Position)), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), deletePost(keys.get(Position)), Toast.LENGTH_SHORT).show();
+                deletePost(keys.get(Position));
                 keys.remove(Position);
                 postList.remove(Position);
                 recyclerView.getAdapter().notifyDataSetChanged();
@@ -136,6 +137,8 @@ public class MyTeamFragment extends Fragment implements OnItemClickListener {
        Toast.makeText(getContext(), "Edit clicked", Toast.LENGTH_SHORT).show();
 
     }
+
+
 
     public String deletePost(String key) {
         reference = FirebaseDatabase.getInstance().getReference("Posts")

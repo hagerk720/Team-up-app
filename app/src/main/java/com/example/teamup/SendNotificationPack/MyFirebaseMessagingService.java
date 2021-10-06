@@ -16,6 +16,8 @@ import com.example.teamup.R;
 import com.example.teamup.activities.HomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -47,11 +49,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d("userid" ,user);
         RemoteMessage.Notification notification = remoteMessage.getNotification();
         int j = Integer.parseInt(user.replaceAll("[\\D]",""));
-      /*  Intent intent = new Intent(this, HomeActivity.class);
 
-        intent.putExtras(bundle);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);*/
-       // PendingIntent pIntent = PendingIntent.getActivity(this , j , intent , PendingIntent.FLAG_ONE_SHOT);
+        NotificationDatabase(user , title);
         Bundle bundle = new Bundle();
         bundle.putString("userId" , user);
         PendingIntent pIntent = new NavDeepLinkBuilder(this)
@@ -79,5 +78,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void SendOreoAndAboveNotification(RemoteMessage remoteMessage) {
+    }
+    public void NotificationDatabase(String userId , String msgBody){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications");
+        reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("sentID").setValue(userId);
+        reference.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("msg").setValue(msgBody);
     }
 }

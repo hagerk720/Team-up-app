@@ -22,14 +22,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.example.teamup.Adapters.RecyclerViewAdapter;
+import com.example.teamup.Objects.Notification;
 import com.example.teamup.Objects.Post;
 import com.example.teamup.OnItemClickListener;
 import com.example.teamup.R;
 import com.example.teamup.SendNotificationPack.APIServer;
 import com.example.teamup.SendNotificationPack.Client;
 import com.example.teamup.SendNotificationPack.Data;
+import com.example.teamup.SendNotificationPack.MyCallBack;
 import com.example.teamup.SendNotificationPack.MyResponse;
 import com.example.teamup.SendNotificationPack.NotificationSender;
 import com.example.teamup.SendNotificationPack.Token;
@@ -86,7 +87,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
         if (getArguments() != null) {
 
         }
-        mRequestQueue = Volley.newRequestQueue(getContext());
+       // mRequestQueue = Volley.newRequestQueue(getContext());
         apiServer= Client.getClient("https://fcm.googleapis.com/").create(APIServer.class);
     }
 
@@ -175,8 +176,21 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
             Toast.makeText(getContext(), "join clicked", Toast.LENGTH_SHORT).show();
             Post post = postList.get(Position);
             receiverId = post.getPostID();
+            getUserName(new MyCallBack() {
+                @Override
+                public void onCallback(ArrayList<Notification> notifications) {
+
+                }
+
+                @Override
+                public void onCallback(String userName) {
+                    sendNotification(receiverId , userName , " request to join your team");
+
+                }
+
+            });
+
             Log.d("receiver id " , receiverId);
-            sendNotification(receiverId , post.getUserName() , " request to join your team");
             join.setText("UnJoin");
         }
 
@@ -186,6 +200,8 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
     public void OnEditClick(int Position) {
 
     }
+
+
     public static void rearrangeCard(View v){
         TextView numOfTeam = v.findViewById(R.id.num_team_postHomeFragment_tv);
         TextView description = v.findViewById(R.id.team_description_postHomeFragment_tv);
@@ -233,7 +249,7 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
                    Token token = snapshot1.getValue(Token.class);
                    String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
                    Log.d("Uid" , user) ;
-                    Data data = new Data(user , "new message" , name + ":" +msg
+                    Data data = new Data(user , "Request" , name + ":" +msg
                             ,user ,R.drawable.facebook_icon);
 
                    NotificationSender sender = new NotificationSender(data , token.getToken());
@@ -262,7 +278,22 @@ public class HomeFragment extends Fragment implements OnItemClickListener{
             }
         });
     }
-    public void gerReceiverUid(String key){
+    public void getUserName(MyCallBack myCallBack){
+        reference = FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String userName = snapshot.child("userName").getValue().toString();
 
+                myCallBack.onCallback(userName);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

@@ -137,9 +137,6 @@ public class ProfileFragment extends Fragment {
        userName = view.findViewById(R.id.profileFragment_user_name_tv);
        userEmail = view.findViewById(R.id.profileFragment_email_address_et) ;
        changePassword = view.findViewById(R.id.profileFragment_change_pass);
-       profile = view.findViewById(R.id.profileFragment_user_photo);
-       editProfilePhoto = view.findViewById(R.id.profileFragment_edit_photo);
-       editUserName = view.findViewById(R.id.profileFragment_edit_userName);
        save_btn = view.findViewById(R.id.profileFragment_save_btn);
        change_email_btn = view.findViewById(R.id.profileFragment_change_email_btn);
        newPassword = view.findViewById(R.id.profileFragment_newPassword_et);
