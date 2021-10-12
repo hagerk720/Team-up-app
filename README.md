@@ -6,3 +6,7 @@ used:
 - Firebase Database
 - Firebase Cloud Messaging
 - Push Notifications
+
+
+https://user-images.githubusercontent.com/78926069/137036814-3b0e32ac-99a5-485e-9140-83354a20164d.mp4
+
